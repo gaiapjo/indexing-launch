@@ -7,7 +7,7 @@ SPARK_MASTER="spark://10.6.53.11:7077"
 
 APP_HOME=`realpath $PWD`
 WS_HOME=`dirname ${APP_HOME}`
-LIB_HOME="$WS_HOME/photpipe"
+LIB_HOME="$WS_HOME/lib"
 EXEC_JAR="file://$WS_HOME/IngestSpark-22.3.0-SNAPSHOT.jar"
 DRIVER_CLASS="gaia.cu5.phot.ingest.drivers.GbinToIndexedStore"
 LOG4J_FILE="${WS_HOME}/log4j.properties"
@@ -41,6 +41,17 @@ spark-submit\
   ${EXEC_JAR}\
   gaia.dpci.spkl.app.DriverApp\
   -driver ${DRIVER_CLASS} \
+  -models "CdbBindings" \
+    -modules "\
+gaia.dpci.charybdis.io.injection.CharybdisModule,\
+gaia.dpci.echidna.core.injection.CoreModule,\
+gaia.cu5.pipe.babel.MdbBabelModule,\
+gaia.cu5.forge.mdb.runtime.inject.ForgeModule,\
+gaia.cu5.forge.mdb.runtime.inject.ForgeMdbRuntimeModule,\
+gaia.cu5.phot.ingest.injection.IngestSparkModule,\
+gaia.cu5.pipe.gtlayer.gbin.GBinModule,\
+gaia.cu5.phot.gbin.spark.input.GbinInputModule,\
+gaia.cu5.du04.cdb.injection.CdbModule" \
   -inputs "\
 gbins=>file://${GBINS},
 partition=>file://${CONF}/partitionConf.yaml,
