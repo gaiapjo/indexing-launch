@@ -18,4 +18,32 @@ JAVA17_EXTRA_OPTS="--add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.
 OUTPUT_DIR="${APP_HOME}/output/${SPARK_APP_NAME}"
 mkdir -p $OUTPUT_DIR
 
+GBINS="/iris-gaia-core-ec-inputs-5/ops-daily/ops-daily-2022.01/20220128042712345/mdb/cu3/idt/raw/AstroObservationVo/000/000/"
+CONF="${APP_HOME}/conf"
 
+spark-submit\
+  --master ${SPARK_MASTER}\
+  --deploy-mode cluster\
+  --name ${SPARK_APP_NAME}\
+  --conf spark.driver.extraJavaOptions="\
+    $LOG4J_OPTS\
+    $JAVA17_EXTRA_OPTS"\
+  --conf spark.executor.extraJavaOptions="\
+    $LOG4J_OPTS\
+    $JAVA17_EXTRA_OPTS"\
+  --conf spark.driver.memory=10g\
+  --conf spark.executor.memory=10g\
+  --conf spark.executor.cores=1\
+  --conf spark.cores.max=100\
+  --conf spark.kryoserializer.buffer.max=1g\
+  --class gaia.dpci.echidna.app.AppLauncher\
+  --jars file://`echo ${LIB_HOME}/* | sed 's/ /,file:\/\//g'`\
+  ${EXEC_JAR}\
+  gaia.dpci.spkl.app.DriverApp\
+  -driver ${DRIVER_CLASS} \
+  -inputs "\
+gbins=>file://${GBINS},
+partition=>file://${CONF}/partitionConf.yaml,
+parquet=>file://${CONF}/parquetConf.yaml,
+stores.out=>file://${CONF}/outputConf.yaml"\
+  -output "file://${OUTPUT_DIR}/"

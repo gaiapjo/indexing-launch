@@ -1,0 +1,4 @@
+# Used by GenerateIntervalsForIndexStore.
+columnName: transitId
+numPartitions: 2
+partType: TRANSIT           # TRANSIT, SOURCE

@@ -1,0 +1,7 @@
+--- # Used when producing input stores with GbintToIndexedStore driver.
+label: "myOutput"                                     # Label used to name output.
+type: gaia.cu1.mdb.cu3.idt.raw.dm.AstroObservationVo  # MDB type.
+indexColumnName: "transitId"                          # Column used for indexing. E.g. transitId, sourceId, obmt
+rangeFilter:                                          # Optional: Filter by range (e.g. transit ID, source ID or OBMT).
+  min: 166531727883159154
+  max: 166585394403946570
