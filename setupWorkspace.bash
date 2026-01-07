@@ -20,7 +20,7 @@ cp $PP/Bundle/target/Bundle-22.3.0-SNAPSHOT-bundle.zip $WS/
 cp $PP/./PhotPipeIngest/IngestSpark/target/IngestSpark-22.3.0-SNAPSHOT.jar $WS/
 
 pushd $WS
-unzip *bundle.zip
+unzip -j *bundle.zip -d ./lib
 popd
 
 echo "... done!"
