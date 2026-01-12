@@ -1,0 +1,5 @@
+--- # Used when producing input stores with GbinToIndexedStore driver.
+compression: ZSTD                                     # Optional: ZSTD
+compressionLevel: 3                                   # Optional for ZSTD: [-7, 22, default 3]
+pageSize: 67_108_864                                  # Optional: bytes:  64*1024*1024
+rowGroupSize: 134_217_728                             # Optional: bytes: 128*1024*1024
