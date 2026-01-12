@@ -35,7 +35,7 @@ spark-submit\
   --conf spark.driver.memory=10g\
   --conf spark.executor.memory=10g\
   --conf spark.executor.cores=1\
-  --conf spark.cores.max=100\
+  --conf spark.cores.max=2000\
   --conf spark.kryoserializer.buffer.max=1g\
   --class gaia.dpci.echidna.app.AppLauncher\
   --jars file://`echo ${LIB_HOME}/* | sed 's/ /,file:\/\//g'`\
