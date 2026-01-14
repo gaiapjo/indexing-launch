@@ -1,6 +1,6 @@
 #!/bin/bash
 timestamp=$(date +%Y%m%d%H%M)
-TEST=test-002
+TEST=test-003
 SPARK_APP_NAME=gbin-index-${TEST}-${timestamp}
 export SPARK_CONF_DIR=/dpci/spark/conf/
 SPARK_MASTER="spark://10.6.53.11:7077"
