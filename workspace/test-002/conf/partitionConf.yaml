@@ -1,0 +1,3 @@
+--- # Used when producing input stores with GbintToIndexedStore driver.
+scaleMode: NUMBER_PARTITIONS                          # {NUMBER_PARTITIONS, RECORDS_PER_PARTITION}
+scale: 100                                           # Value corresponding to 'scaleMode'.
